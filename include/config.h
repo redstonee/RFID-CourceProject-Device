@@ -8,8 +8,8 @@ constexpr uint8_t PIN_SCL = 27;
 
 constexpr uint8_t PIN_DAC = 25;
 
-constexpr char WIFI_SSID[] = "Boy Next Door";
-constexpr char WIFI_PSK[] = "Fantasies";
+constexpr char WIFI_SSID[] = "Fuck That";
+constexpr char WIFI_PSK[] = "suckmydick";
 
 enum class SystemState
 {

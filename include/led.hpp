@@ -33,7 +33,7 @@ namespace LedCtrl
         {
             showHSV(h, 255, v);
             delay(delayTime);
-        }
+        };
     }
 
     void ledTask(void *pvParameters)
@@ -43,13 +43,15 @@ namespace LedCtrl
             switch (sState)
             {
             case SystemState::idle:
-                static uint8_t idelLedHue = 0;
-                showHSV(idelLedHue++,255,50);
+                static uint8_t idleLedHue = 0;
+                showHSV(idleLedHue++, 255, 50);
+                if (idleLedHue >= 65)
+                    idleLedHue = 0;
                 delay(100);
                 break;
 
             case SystemState::waitWiFi:
-                blink(1000);
+                blink(50);
                 break;
 
             case SystemState::authing:
@@ -59,11 +61,11 @@ namespace LedCtrl
                 break;
 
             case SystemState::authFail:
-                blink(15500, 1);
+                blink(4, 1);
                 break;
 
             case SystemState::authPass:
-                blink(6300, 1);
+                blink(23, 1);
                 break;
 
             case SystemState::nfcError:

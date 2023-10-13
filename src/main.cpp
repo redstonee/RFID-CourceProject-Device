@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <Preferences.h>
 #include <XT_DAC_Audio.h>
@@ -38,7 +37,7 @@ void setup()
   }
   Serial.println("WiFi Connected");
   sState = SystemState::idle;
-
+  SoundFx::playSound(SoundFx::bootUp);
   while (true)
   {
     if (NfcReader::wakeUp())
@@ -55,8 +54,11 @@ String byteArray2HexString(uint8_t *data, uint8_t len)
   String ret = "";
   for (uint8_t i = 0; i < len; i++)
   {
+    if (data[i] < 0x10)
+      ret += "0";
     ret += String(data[i], HEX);
   }
+  ret.toUpperCase();
   return ret;
 }
 
@@ -80,6 +82,7 @@ void loop()
     if (Communication::auth(uidStr, &username))
     {
       sState = SystemState::authPass;
+      Communication::submitSignIn(uidStr);
       SoundFx::playSound(SoundFx::authPass);
     }
     else

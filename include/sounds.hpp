@@ -5890,17 +5890,6 @@ namespace SoundFx
         dacDev = new XT_DAC_Audio_Class(PIN_DAC, 0);
     }
 
-    // void playSound(uint8_t wav[])
-    // {
-    //     XT_Wav_Class sound(wav);
-    //     dacDev->Play(&sound);
-    //     while (sound.Playing)
-    //     {
-    //         dacDev->FillBuffer();
-    //         delay(1);
-    //     }
-    // }
-
     void playSound(const uint8_t wav[])
     {
         XT_Wav_Class sound(wav);
